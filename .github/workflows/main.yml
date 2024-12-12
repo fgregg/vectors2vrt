@@ -41,9 +41,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v3      
       with:
         python-version: '3.x'
+    - name: Install gdal
+      run: sudo apt-get install -y gdal-bin libgdal-dev  
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
