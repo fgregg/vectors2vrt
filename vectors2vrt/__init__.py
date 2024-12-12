@@ -73,7 +73,12 @@ def validate_input(ctx, param, input_files):
     help="Path to the output VRT file or '-' to write to stdout",
 )
 def main(input_files, output):
-    """Create a VRT file from vector inputs."""
+    """Create a VRT file from vector inputs.
+
+    \b
+    example:
+       vectors2vrt A.geojson B.sqlite -o output.vrt
+    """
 
     vrt_tree = create_vrt_from_vector(input_files)
     ElementTree.indent(vrt_tree)
