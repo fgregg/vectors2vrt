@@ -34,7 +34,7 @@ jobs:
 
     name: Upload release to PyPI
     environment:
-      name: pypi
+      name: release
       url: https://pypi.org/p/vectors2vrt
     permissions:
       id-token: write 
