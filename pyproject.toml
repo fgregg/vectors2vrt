@@ -1,6 +1,6 @@
 [project]
 name = "vectors2vrt"
-version = "0.1"
+version = "0.2"
 description = "Generate a VRT file from GIS vector sources"
 readme = "README.md"
 license = {text = "MIT License", url = "http://www.opensource.org/licenses/mit-license.php"}
