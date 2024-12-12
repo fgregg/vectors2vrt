@@ -16,6 +16,11 @@ Homepage = "https://github.com/fgregg/vectors2vrt"
 [project.scripts]
 vectors2vrt = "vectors2vrt:main"
 
+[project.optional-dependencies]
+dev = ["black",
+       "isort",
+]
+
 [build-system]
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
