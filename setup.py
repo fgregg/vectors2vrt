@@ -1,5 +1,6 @@
-from setuptools import setup
 import subprocess
+
+from setuptools import setup
 
 try:
     # Get the version of GDAL using gdal-config
