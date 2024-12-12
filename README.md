@@ -1,4 +1,6 @@
 # `vectors2vrt`
+
+## Usage
 ```console
 Usage: vectors2vrt [OPTIONS] [INPUT_FILES]...
 
@@ -12,3 +14,13 @@ Options:
                      [required]
   --help             Show this message and exit.
 ```
+
+## Installation
+
+Requires GDAL to be installed on your system.
+
+```console
+> pip install vectors2vrt
+```
+
+if you upgrade your GDAL you will need to re-install.
