@@ -29,6 +29,8 @@ def create_vrt_from_vector(input_files):
                 f"Failed to open input file '{input_file}'. Are you sure it's a GIS vector file?"
             )
 
+        is_csv = data_source.GetDriver().GetName() == "CSV"
+
         # Add each layer to the VRT
         for layer_index in range(data_source.GetLayerCount()):
             layer = data_source.GetLayerByIndex(layer_index)
@@ -45,6 +47,30 @@ def create_vrt_from_vector(input_files):
 
             src_layer = ElementTree.SubElement(layer_element, "SrcLayer")
             src_layer.text = layer_name
+
+            if is_csv:
+                layer_defn = layer.GetLayerDefn()
+                field_names = [
+                    layer_defn.GetFieldDefn(i).GetName()
+                    for i in range(layer_defn.GetFieldCount())
+                ]
+
+                has_lng = "lng" in field_names
+                has_lat = "lat" in field_names
+
+                if has_lng and has_lat:
+                    ElementTree.SubElement(
+                        layer_element,
+                        "GeometryField",
+                        encoding="PointFromColumns",
+                        x="lng",
+                        y="lat",
+                    )
+                else:
+                    click.echo(
+                        f"Warning: CSV file '{input_file}' (layer '{layer_name}') was recognized by OGR as a CSV but does not contain both 'lng' and 'lat' fields. Omitting GeometryField.",
+                        err=True,
+                    )
 
     # Write the VRT content
     tree = ElementTree.ElementTree(vrt_root)
@@ -73,7 +99,7 @@ def validate_input(ctx, param, input_files):
     help="Path to the output VRT file or '-' to write to stdout",
 )
 def main(input_files, output):
-    """Create a VRT file from vector inputs.
+    """Create a VRT file from vector inputs. Will pick up latitude and longitude columns from CSV files if and only if the field names are labeled "lat" and "lng".
 
     \b
     example:

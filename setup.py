@@ -13,7 +13,7 @@ except FileNotFoundError as e:
 
 setup(
     name="vectors2vrt",
-    version="0.2",
+    version="0.3",
     description="Generate a VRT file from GIS vector sources",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",

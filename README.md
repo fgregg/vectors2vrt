@@ -4,7 +4,9 @@
 ```console
 Usage: vectors2vrt [OPTIONS] [INPUT_FILES]...
 
-  Create a VRT file from vector inputs.
+  Create a VRT file from vector inputs. Will pick up latitude and longitude
+  columns from CSV files if and only if the field names are labeled "lat" and
+  "lng".
 
   example:
      vectors2vrt A.geojson B.sqlite -o output.vrt
